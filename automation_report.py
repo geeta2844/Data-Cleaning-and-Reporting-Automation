@@ -1,17 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# ==========================
-# LOAD DATA
-# ==========================
-
 df = pd.read_csv("mobile_sales_data.csv")
 
 original_rows = len(df)
-
-# ==========================
-# CHECK MISSING VALUES
-# ==========================
 
 missing_before = df.isnull().sum().sum()
 
@@ -23,23 +15,11 @@ for col in df.columns:
     else:
         df[col] = df[col].fillna(df[col].median())
 
-# ==========================
-# REMOVE DUPLICATES
-# ==========================
-
 duplicates_removed = df.duplicated().sum()
 
 df = df.drop_duplicates()
 
-# ==========================
-# SAVE CLEANED DATA
-# ==========================
-
 df.to_csv("cleaned_sales_data.csv", index=False)
-
-# ==========================
-# GENERATE REPORT
-# ==========================
 
 report = f"""
 DATA QUALITY REPORT
@@ -61,23 +41,11 @@ with open("data_quality_report.txt", "w") as file:
 
 print(report)
 
-# ==========================
-# CREATE SCREENSHOTS FOLDER
-# ==========================
-
 import os
 
 os.makedirs("screenshots", exist_ok=True)
 
-# ==========================
-# REVENUE COLUMN
-# ==========================
-
 df["Revenue"] = df["Price"] * df["Quantity Sold"]
-
-# ==========================
-# REVENUE BY BRAND
-# ==========================
 
 brand_sales = df.groupby("Brand")["Revenue"].sum()
 
@@ -93,10 +61,6 @@ plt.savefig("screenshots/revenue_by_brand.png")
 
 plt.close()
 
-# ==========================
-# REVENUE BY REGION
-# ==========================
-
 region_sales = df.groupby("Region")["Revenue"].sum()
 
 plt.figure(figsize=(8,5))
@@ -110,10 +74,6 @@ plt.tight_layout()
 plt.savefig("screenshots/revenue_by_region.png")
 
 plt.close()
-
-# ==========================
-# MISSING VALUES SUMMARY
-# ==========================
 
 missing_data = pd.DataFrame({
     "Column": df.columns,
