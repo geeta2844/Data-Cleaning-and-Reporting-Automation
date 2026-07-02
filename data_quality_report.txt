@@ -1,0 +1,13 @@
+
+DATA QUALITY REPORT
+
+Original Records: 50000
+
+Final Records: 50000
+
+Missing Values Found: 49966
+
+Duplicates Removed: 0
+
+Columns:
+['Product', 'Brand', 'Product Code', 'Product Specification', 'Price', 'Inward Date', 'Dispatch Date', 'Quantity Sold', 'Customer Name', 'Customer Location', 'Region', 'Core Specification', 'Processor Specification', 'RAM', 'ROM', 'SSD']
